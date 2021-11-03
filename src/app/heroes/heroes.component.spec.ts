@@ -1,6 +1,7 @@
 import { of } from "rxjs";
 import { HeroesComponent } from "./heroes.component"
 
+// Isolated Unit Component Test
 describe('Heroes Component', ()=>{
 
   let component: HeroesComponent
