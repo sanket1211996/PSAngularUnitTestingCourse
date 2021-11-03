@@ -36,6 +36,41 @@ describe('Heroes Component', ()=>{
       //Assert
       expect(component.heroes.length).toBe(2);
     })
+
+    // Interaction Test of component with service.
+    it('should call deleteHero with correct hero: SuperDude', ()=>{
+      //Arrange
+      //of() method of rxjs is returning observable
+      mockHeroService.deleteHero.and.returnValue(of(true))
+      component.heroes = HEROES;
+      //Act
+      component.delete(HEROES[2]);
+
+      // //Assert without parameter check
+      // expect(mockHeroService.deleteHero).toHaveBeenCalled();
+
+      //Assert  check if correct param is passed.
+      expect(mockHeroService.deleteHero).toHaveBeenCalledWith(HEROES[2]);
+
+    })
+
+    // We can put x infront of it() method to disable it
+    xit('should call deleteHero with correct hero: Wonderful Women', ()=>{
+      //Arrange
+      //of() method of rxjs is returning observable
+      mockHeroService.deleteHero.and.returnValue(of(true))
+      component.heroes = HEROES;
+      //Act
+      component.delete(HEROES[2]);
+
+      // //Assert without parameter check
+      // expect(mockHeroService.deleteHero).toHaveBeenCalled();
+
+      //Assert  check if correct param is passed.
+      expect(mockHeroService.deleteHero).toHaveBeenCalledWith(HEROES[1]);
+
+    })
+
   })
 
 
