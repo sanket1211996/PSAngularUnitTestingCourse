@@ -1,7 +1,6 @@
 import { NO_ERRORS_SCHEMA } from "@angular/core";
 import { TestBed } from "@angular/core/testing"
 import { By } from "@angular/platform-browser";
-import { RouterModule } from "@angular/router";
 import { HeroComponent } from "./hero.component"
 
 //Shallow Integration Testing for Hero Component
