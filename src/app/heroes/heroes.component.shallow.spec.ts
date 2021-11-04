@@ -1,5 +1,6 @@
 import { Component, Input, NO_ERRORS_SCHEMA } from "@angular/core"
 import { ComponentFixture, TestBed } from "@angular/core/testing"
+import { By } from "@angular/platform-browser";
 import { of } from "rxjs";
 import { Hero } from "../hero";
 import { HeroService } from "../hero.service";
@@ -13,7 +14,7 @@ describe('Hereos Component Shallow Integration Test', ()=>{
   // Faking child component
   @Component({
     selector: 'app-hero',
-    template: '<div><div>',
+    template: '<div>Fake Hero<div>',
     //styleUrls:  ['./hero.component.css']
   })
  //Need to remove export tag since we are not exporting this class
@@ -50,6 +51,13 @@ describe('Hereos Component Shallow Integration Test', ()=>{
     mockHeroService.getHeroes.and.returnValue(of(HEROES));
     fixture.detectChanges();
     expect(fixture.componentInstance.heroes.length).toEqual(3);
+  })
+
+  it(' should create one li element for each hero', ()=>{
+    mockHeroService.getHeroes.and.returnValue(of(HEROES));
+    fixture.detectChanges();
+    let liElements = fixture.debugElement.queryAll(By.css('li'));
+    expect(liElements.length).toEqual(3);
   })
 
 })
