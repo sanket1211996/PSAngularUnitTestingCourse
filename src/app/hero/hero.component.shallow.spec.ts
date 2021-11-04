@@ -1,5 +1,6 @@
 import { NO_ERRORS_SCHEMA } from "@angular/core";
 import { TestBed } from "@angular/core/testing"
+import { By } from "@angular/platform-browser";
 import { RouterModule } from "@angular/router";
 import { HeroComponent } from "./hero.component"
 
@@ -38,6 +39,33 @@ describe('HeroComponent (shallow tests)', ()=>{
     fixture.detectChanges();
     //Assert
     expect(fixture.componentInstance.hero.name).toEqual('SpiderDude');
+  })
+
+  it('should render hero inside anchor tag inside HTML ', ()=>{
+    //Arrange Act
+    fixture.componentInstance.hero = {id:1, name:'SpiderDude', strength:8};
+    // It is required to detect changes happen in DOM after component initiate and execute
+    // the angular bindings.
+    fixture.detectChanges();
+
+    //Assert
+    //nativeElement is similiar to DOM in plain old javascript
+    // -> 'a' selecting anchor tag inside DOM.
+    expect(fixture.nativeElement.querySelector('a').textContent).toContain('SpiderDude');
+  })
+
+  it('should render hero inside anchor tag inside HTML (Using debug element) ', ()=>{
+    //Arrange Act
+    fixture.componentInstance.hero = {id:1, name:'SpiderDude', strength:8};
+    // It is required to detect changes happen in DOM after component initiate and execute
+    // the angular bindings.
+    fixture.detectChanges();
+
+    //Assert
+    // Similiar to directly aaccessing DOM using nativeElement we can access root
+    // of template DOM using debugElement with some additioanl funtionlity.
+    let debugAnchor = fixture.debugElement.query(By.css('a'));
+    expect(debugAnchor.nativeElement.textContent).toContain('SpiderDude');
   })
 
 })
